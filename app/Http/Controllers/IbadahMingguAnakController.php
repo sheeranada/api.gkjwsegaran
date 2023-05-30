@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Validator;
 
 class IbadahMingguAnakController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware("auth:api");
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -43,8 +49,8 @@ class IbadahMingguAnakController extends Controller
         $validator = Validator::make(['id' => $id], [
             'id' => 'required|string|exists:ibadah_minggu_anak,id',
         ], [
-                'exists' => 'Data dengan id ' . $id . ' tidak ditemukan.',
-            ]);
+            'exists' => 'Data dengan id ' . $id . ' tidak ditemukan.',
+        ]);
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -59,8 +65,8 @@ class IbadahMingguAnakController extends Controller
         $validator = Validator::make(['id' => $id], [
             'id' => 'required|string|exists:ibadah_minggu_anak,id',
         ], [
-                'exists' => 'Gagal update ! data dengan id ' . $id . ' tidak ditemukan.',
-            ]);
+            'exists' => 'Gagal update ! data dengan id ' . $id . ' tidak ditemukan.',
+        ]);
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -82,8 +88,8 @@ class IbadahMingguAnakController extends Controller
         $validator = Validator::make(['id' => $id], [
             'id' => 'required|string|exists:ibadah_minggu_anak,id',
         ], [
-                'exists' => 'Gagal menghapus ! data dengan id ' . $id . ' tidak ditemukan.',
-            ]);
+            'exists' => 'Gagal menghapus ! data dengan id ' . $id . ' tidak ditemukan.',
+        ]);
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,

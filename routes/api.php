@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IbadahKategorialController;
 use App\Http\Controllers\IbadahKeluargaController;
 use App\Http\Controllers\IbadahMingguAnakController;
@@ -13,12 +14,15 @@ use App\Http\Controllers\StolaController;
 use App\Http\Controllers\TeamMusicController;
 use App\Http\Controllers\TempatIbadahController;
 use App\Http\Controllers\WilayahPelayanController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::controller(AuthController::class)->prefix("/auth")->group(function () {
+    Route::post('/login', "login");
+    Route::post('/register', "register");
+    Route::post('/logout', "logout");
+    Route::post('/refresh', "refresh");
 });
+
 Route::resource('ibadah_kategorial', IbadahKategorialController::class);
 Route::resource('ibadah_keluarga', IbadahKeluargaController::class);
 Route::resource('ibadah_minggu_anak', IbadahMingguAnakController::class);
